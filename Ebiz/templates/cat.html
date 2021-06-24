@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block navbar %}
+
+    <div class="navbar navbar-expand-lg navbar-dark bg-orange">
+        <a href="{% url 'homepage' %}" class="navbar-brand">Ebiz</a>
+    <form action="{% url 'search' %}" class="mx-auto form-inline"  method="get">
+        {% csrf_token %}
+                <div class="form-group">
+                    <input type="text"  name="search" value="{{ request.get.search }}" class="form-control ml-1" placeholder="Search for anything, anywhere in india">
+                    <input type="submit" hidden>
+                    </div>
+            </form>
+
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="{% url 'homepage' %}" class="nav-link">Home</a>
+        </li>
+    </ul>
+                </div>
+
+    </div>
+
+{% endblock %}
+{% block container %}
+
+    <div class="container mt-3 ">
+    <div class="row">
+        <div class="col-lg-3">
+            {% block sidelist %}
+                {{ block.super }}
+
+            {% endblock %}
+
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+            {% if biz|length < 1 %}
+                <div class="col-lg-12">
+                <div class="card alert alert-danger">
+                    <div class="card-body">
+                        <h2 class="lead">Sorry... <br><small>Not found any Buniess in this Category</small></h2>
+                    </div>
+                </div>
+                </div>
+            {% else %}
+                {% for foo in biz %}
+                <div class="col-lg-3">
+                    <a href="{% url 'item' foo.biz_id %}" class="nav-link m-0 p-0 text-dark">
+                <div class="card">
+                    <img src="{{ foo.logo.url }}" class="card-img-top" height="200px" alt="">
+                    <div class="card-body">
+                        {{ foo.title }} <br>
+                        <span class="badge badge-info">{{ foo.category }}</span><br>
+                        <span class="badge badge-danger">{{ foo.city }}</span>
+                    </div>
+                </div>
+                        </a>
+                </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

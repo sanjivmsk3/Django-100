@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block navbar %}
+
+    <div class="navbar navbar-expand-lg navbar-dark bg-orange">
+        <a href="{% url 'homepage' %}" class="navbar-brand">Ebiz</a>
+        <form action="" class="mx-auto">
+            <div class="row no-gutters">
+                        <div class="col-lg-4">
+                            <select name="" id="" class="form-control" autocomplete="off">
+                                <option value="">Purnia</option>
+                                <option value="">Patna</option>
+                                <option value="">Bhagalpur</option>
+                                <option value="">Purnea</option>
+                            </select>
+                        </div>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control ml-1" placeholder="Search for anything, anywhere in india">
+                    <input type="submit" hidden>
+                    </div>
+                </div>
+
+            </div>
+
+
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a href="{% url 'homepage' %}" class="nav-link">Home</a>
+        </li>
+    </ul>
+        </form>
+
+    </div>
+
+{% endblock %}
+{% block container %}
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    {% for x in biz %}
+                        <img src="{{ x.logo.url }}" class="card-img-top mt-5" alt="">
+                        <h1>{{ x.title }}</h1>
+                        <h2>Category:-{{ x.category }}</h2>
+                        <h2>{{ x.doc }}</h2>
+                        <h2>City:-{{ x.city }}</h2>
+                        <h2>Primary_contact:-{{ x.primary_contact }}</h2>
+                        <h2>Secondary_contact:-{{ x.secondary_contact }}</h2>
+                        <h2>Email:-{{ x.email }}</h2>
+                       <p class="lead">{{ x.description }}</p>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

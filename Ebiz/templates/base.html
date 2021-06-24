@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The E-Biz</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "bootstrap.css" %}">
+</head>
+<body class="bg-light">
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-orange">
+    <a href="{% url 'homepage' %}" class="navbar-brand">The E-Biz</a>
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a href="{% url 'insert' %}" class="btn bg-white text-dark border-info">List Biz Here</a>
+    </li>
+
+</ul>
+</nav>
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+{% block container %}
+    {% block sidelist %}
+
+            <div class="list-group">
+                {% for c in cat %}
+                    <a href="{% url 'category' c.id %}" class="list-group-item list-group-item-action">{{ c.category_name }}</a>
+                {% endfor %}
+            </div>
+
+    {% endblock %}
+{% endblock %}
+</body>
+</html>

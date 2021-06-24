@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block jumbotron %}
+    <div class="jumbotron bg-orange text-white mx-auto rounded-0">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="lead">The E-Biz online business blog</div>
+            <form action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="row no-gutters">
+                        <div class="col-lg-3">
+                            <select name="" id="" class="form-control" autocomplete="off">
+                                <option value="">Purnia</option>
+                                <option value="">Patna</option>
+                                <option value="">Bhagalpur</option>
+                                <option value="">Purnea</option>
+                            </select>
+                        </div>
+                <div class="col-lg-9">
+                    <input type="text" class="form-control ml-1" placeholder="Search for anything, anywhere in india">
+                    <input type="submit" hidden>
+                </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+{% block container %}
+
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            {% block sidelist %}
+                {{ block.super }}
+
+            {% endblock %}
+
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+                {% for foo in biz %}
+                <div class="col-lg-3">
+                    <a href="{% url 'item' foo.slug %}" class="nav-link m-0 p-0 text-dark">
+                <div class="card">
+                    <img src="{{ foo.logo.url }}" class="card-img-top" height="200px" alt="">
+                    <div class="card-body">
+                        {{ foo.title }} <br>
+                        <span class="badge badge-info">{{ foo.category }}</span>
+                        <span class="badge badge-danger">{{ foo.city }}</span>
+                    </div>
+                </div>
+                        </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
